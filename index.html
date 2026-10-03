@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MissionIT — Gestion des Missions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dark-mode.css">
+  <!-- Applique le thème mémorisé AVANT le premier rendu, pour éviter un flash de lumière -->
+  <script src="dark-mode.js"></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     ÉCRAN D'ACCUEIL — GUIDE DE DÉMARRAGE
+════════════════════════════════════════════════ -->
+<div id="welcomeScreen" class="welcome-screen">
+  <div class="ws-bg">
+    <div class="ws-orb ws-orb1"></div>
+    <div class="ws-orb ws-orb2"></div>
+    <div class="ws-orb ws-orb3"></div>
+    <div class="ws-grid"></div>
+  </div>
+
+  <div class="ws-container">
+    <div class="ws-header">
+      <div class="ws-logo">⚡</div>
+      <div>
+        <h1 class="ws-title">MissionIT</h1>
+        <p class="ws-subtitle">Plateforme de gestion des missions IT</p>
+      </div>
+    </div>
+
+    <div class="ws-guide-title">
+      <span class="ws-badge">Guide de démarrage</span>
+      <h2>Comment utiliser la plateforme ?</h2>
+      <p>Suivez ces étapes pour créer votre compte et commencer</p>
+    </div>
+
+    <div class="ws-steps">
+
+      <div class="ws-step">
+        <div class="ws-step-num">1</div>
+        <div class="ws-step-icon">🛡️</div>
+        <div class="ws-step-body">
+          <h3>L'Administrateur crée son compte</h3>
+          <p>Sur l'écran de connexion, sélectionnez <strong>Administrateur</strong>, saisissez votre email, votre nom et votre mot de passe.</p>
+          <div class="ws-step-actions">
+            <div class="ws-action"><span class="ws-action-num">①</span><span>Cliquez sur <strong>"🛡️ Administrateur"</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num">②</span><span>Saisissez votre <strong>email</strong> et votre <strong>mot de passe</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num">③</span><span>Cliquez <strong>"Se connecter / Créer mon compte →"</strong></span></div>
+          </div>
+          <div class="ws-step-note">✅ Si l'email est nouveau, remplissez votre nom pour créer votre espace admin.</div>
+        </div>
+      </div>
+
+      <div class="ws-arrow">↓</div>
+
+      <div class="ws-step ws-step-green">
+        <div class="ws-step-num ws-num-green">2</div>
+        <div class="ws-step-icon">👥</div>
+        <div class="ws-step-body">
+          <h3>L'Admin crée un compte Fonctionnaire</h3>
+          <p>Une fois connecté, allez dans <strong>Fonctionnaires</strong> et ajoutez un membre. Un code d'invitation est généré automatiquement.</p>
+          <div class="ws-step-actions">
+            <div class="ws-action"><span class="ws-action-num ws-action-green">①</span><span>Menu gauche → <strong>"👥 Fonctionnaires"</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num ws-action-green">②</span><span>Cliquez <strong>"＋ Ajouter un fonctionnaire"</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num ws-action-green">③</span><span>Remplissez : <strong>nom, email, téléphone, département</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num ws-action-green">④</span><span><strong>Copiez le code d'invitation</strong> et transmettez-le</span></div>
+          </div>
+          <div class="ws-step-note ws-note-green">🔑 Un code unique (ex: AB3D7FKZ) est généré. Transmettez-le au fonctionnaire par email ou message.</div>
+        </div>
+      </div>
+
+      <div class="ws-arrow">↓</div>
+
+      <div class="ws-step ws-step-orange">
+        <div class="ws-step-num ws-num-orange">3</div>
+        <div class="ws-step-icon">👨‍💼</div>
+        <div class="ws-step-body">
+          <h3>Le Fonctionnaire active son compte</h3>
+          <p>Le fonctionnaire se connecte avec son email et le code reçu, puis crée son mot de passe personnel.</p>
+          <div class="ws-step-actions">
+            <div class="ws-action"><span class="ws-action-num ws-action-orange">①</span><span>Cliquez sur <strong>"👨‍💼 Fonctionnaire"</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num ws-action-orange">②</span><span>Saisissez son <strong>email</strong> et le <strong>code d'invitation</strong></span></div>
+            <div class="ws-action"><span class="ws-action-num ws-action-orange">③</span><span>Crée son <strong>mot de passe</strong> → Compte activé !</span></div>
+          </div>
+          <div class="ws-step-note ws-note-orange">🎯 Le fonctionnaire accède à ses missions, peut en réserver, les démarrer et les marquer terminées.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ws-roles-summary">
+      <h3>Récapitulatif des accès</h3>
+      <div class="ws-roles-grid">
+        <div class="ws-role-card ws-role-admin">
+          <div class="ws-role-icon">🛡️</div>
+          <h4>Administrateur</h4>
+          <ul>
+            <li>✅ Créer / modifier / supprimer des missions</li>
+            <li>✅ Créer des comptes fonctionnaires</li>
+            <li>✅ Valider les missions terminées</li>
+            <li>✅ Voir les statistiques</li>
+            <li>✅ Chat public & privé</li>
+          </ul>
+        </div>
+        <div class="ws-role-card ws-role-fonct">
+          <div class="ws-role-icon">👨‍💼</div>
+          <h4>Fonctionnaire</h4>
+          <ul>
+            <li>✅ Voir les missions disponibles</li>
+            <li>✅ Prendre / réserver des missions</li>
+            <li>✅ Marquer une mission terminée</li>
+            <li>✅ Voir son profil et historique</li>
+            <li>✅ Chat public & privé</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-cta">
+      <button id="btnStartApp" class="ws-btn-start">
+        <span>⚡</span>
+        <span>Commencer — Aller à la connexion</span>
+        <span>→</span>
+      </button>
+      <p class="ws-cta-hint">Cliquez pour accéder à l'écran de connexion</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ÉCRAN DE CONNEXION
+════════════════════════════════════════ -->
+<div id="loginScreen" class="login-screen hidden">
+  <div class="login-bg">
+    <div class="lb-orb lb-orb1"></div>
+    <div class="lb-orb lb-orb2"></div>
+    <div class="lb-orb lb-orb3"></div>
+    <div class="lb-grid"></div>
+  </div>
+  <div class="login-container">
+    <div class="login-brand">
+      <div class="brand-logo">⚡</div>
+      <h1>MissionIT</h1>
+      <p>Plateforme de gestion des missions IT</p>
+    </div>
+
+    <button id="btnBackToGuide" class="btn-back-guide">← Retour au guide</button>
+
+    <div class="login-card">
+      <div class="role-pills" id="rolePills">
+        <button class="rpill" data-role="admin">🛡️ Administrateur</button>
+        <button class="rpill active" data-role="fonctionnaire">👨‍💼 Fonctionnaire</button>
+      </div>
+
+      <!-- ── PANEL ADMIN ── -->
+      <div id="pAdmin" class="login-panel hidden">
+ 
+  <!-- Tabs Connexion / Inscription -->
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Connexion</button>
+    <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Créer un compte</button>
+  </div>
+ 
+  <!-- ══ CONNEXION ══ -->
+  <div id="aFormLogin">
+    <div class="lp-title">
+      <span class="lp-ico">🛡️</span>
+      <div><h3>Espace Administrateur</h3><p>Connectez-vous à votre espace</p></div>
+    </div>
+    <div class="field-group">
+      <label>Email administrateur</label>
+      <div class="inp-wrap"><span>✉️</span><input type="email" id="aEmail" placeholder="admin@exemple.com"></div>
+    </div>
+    <div class="field-group" style="margin-top:12px;">
+      <label>Mot de passe</label>
+      <div class="inp-wrap"><span>🔒</span><input type="password" id="aPwd" placeholder="Mot de passe..."></div>
+    </div>
+    <p id="aErrMain" class="ferr hidden"></p>
+    <button class="btn-login" id="btnALogin"><span>Se connecter</span><span>→</span></button>
+    <button class="btn-forgot-pwd" onclick="openForgotModal()">🔑 Mot de passe oublié ?</button>
+  </div>
+ 
+  <!-- ══ INSCRIPTION ══ -->
+  <div id="aFormRegister" class="hidden">
+    <div class="lp-title">
+      <span class="lp-ico">✨</span>
+      <div><h3>Créer un compte admin</h3><p>Inscription gratuite et immédiate</p></div>
+    </div>
+    <div class="field-group">
+      <label>Nom complet *</label>
+      <div class="inp-wrap"><span>👤</span><input type="text" id="rNom" placeholder="Prénom Nom" maxlength="50"></div>
+    </div>
+    <div class="field-group" style="margin-top:12px;">
+      <label>Email *</label>
+      <div class="inp-wrap"><span>✉️</span><input type="email" id="rEmail" placeholder="admin@exemple.com"></div>
+    </div>
+    <div class="field-group" style="margin-top:12px;">
+      <label>Mot de passe * <small>(min. 6 car.)</small></label>
+      <div class="inp-wrap"><span>🔒</span><input type="password" id="rPwd" placeholder="Mot de passe..." oninput="checkPwdStrength(this.value)"></div>
+    </div>
+    <div class="pwd-strength-wrap" id="pwdStrengthWrap" style="display:none">
+      <div class="pwd-strength-bar" id="pwdStrengthBar"></div>
+      <span id="pwdStrengthLabel"></span>
+    </div>
+    <div class="field-group" style="margin-top:12px;">
+      <label>Confirmer le mot de passe *</label>
+      <div class="inp-wrap"><span>✅</span><input type="password" id="rPwdConfirm" placeholder="Confirmer..."></div>
+    </div>
+    <p id="aErrRegister" class="ferr hidden"></p>
+    <button class="btn-login btn-login-ok" id="btnARegister" style="margin-top:14px;">
+      <span>Créer mon compte</span><span>→</span>
+    </button>
+    <p style="font-size:11px;color:#64748b;text-align:center;margin-top:10px;">
+      En vous inscrivant, vous acceptez les conditions d'utilisation de MissionIT.
+    </p>
+  </div>
+ 
+  <!-- ══ CRÉATION (ancien flow - gardé pour compatibilité) ══ -->
+  <div id="aFormCreate" class="hidden">
+    <div class="step-info step-ok">✅ Nouveau compte — complétez vos informations</div>
+    <div class="field-group" style="margin-top:12px;">
+      <label>Email</label>
+      <div class="inp-wrap"><span>✉️</span><input type="email" id="aEmailCreate" placeholder="admin@exemple.com" readonly></div>
+    </div>
+    <div class="field-group" style="margin-top:10px;">
+      <label>Votre nom complet *</label>
+      <div class="inp-wrap"><span>👤</span><input type="text" id="aNom" placeholder="Prénom Nom"></div>
+    </div>
+    <div class="field-group" style="margin-top:10px;">
+      <label>Confirmer le mot de passe *</label>
+      <div class="inp-wrap"><span>✅</span><input type="password" id="aNewPwdConfirm" placeholder="Confirmer..."></div>
+    </div>
+    <p id="aErrCreate" class="ferr hidden"></p>
+    <div class="step-btns">
+      <button class="btn-back-sm" id="btnABackCreate">← Retour</button>
+      <button class="btn-login btn-login-sm btn-login-ok" id="btnACreate"><span>Créer mon compte</span><span>→</span></button>
+    </div>
+  </div>
+ 
+</div>
+ 
+      <!-- ── PANEL FONCTIONNAIRE ── -->
+      <div id="pFonct" class="login-panel">
+        <div class="lp-title">
+          <span class="lp-ico">👨‍💼</span>
+          <div><h3>Espace Fonctionnaire</h3><p>Accédez à vos missions</p></div>
+        </div>
+
+        <!-- Formulaire email + mot de passe ou code simultanés -->
+        <div id="fFormMain">
+          <div class="field-group">
+            <label>Votre email</label>
+            <div class="inp-wrap"><span>✉️</span><input type="email" id="fEmail" placeholder="votre@email.com"></div>
+          </div>
+          <div class="field-group" style="margin-top:12px;" id="fPwdField">
+            <label>Mot de passe</label>
+            <div class="inp-wrap"><span>🔒</span><input type="password" id="fLoginPwd" placeholder="Votre mot de passe..."></div>
+          </div>
+          <p id="fErrMain" class="ferr hidden"></p>
+          <button class="btn-login" id="btnFLogin"><span>Se connecter</span><span>→</span></button>
+          <div class="login-help-box" style="margin-top:12px;">
+            <span>💡</span>
+            <p>Si c'est votre première connexion, votre admin vous a transmis un <strong>code d'invitation</strong>.</p>
+          </div>
+        </div>
+
+        <!-- Étape activation : saisie du code -->
+        <div id="fFormCode" class="hidden">
+          <div class="step-info">Première connexion — <strong id="fCodeEmail"></strong></div>
+          <div class="field-group" style="margin-top:12px;">
+            <label>Code d'invitation</label>
+            <div class="inp-wrap"><span>🔐</span><input type="text" id="fCode" placeholder="Ex: AB3D7FKZ" maxlength="8" class="code-input"></div>
+          </div>
+          <p id="fErrCode" class="ferr hidden"></p>
+          <div class="step-btns">
+            <button class="btn-back-sm" id="btnFBackCode">← Retour</button>
+            <button class="btn-login btn-login-sm" id="btnFVerify"><span>Vérifier</span><span>→</span></button>
+          </div>
+          <div class="login-help-box" style="margin-top:12px;">
+            <span>💡</span>
+            <p>Le code vous a été transmis par votre administrateur. Il ressemble à : <strong>AB3D7FKZ</strong></p>
+          </div>
+        </div>
+
+        <!-- Étape activation : créer mot de passe -->
+        <div id="fFormPwd" class="hidden">
+          <div class="step-info step-ok">✅ Bienvenue <strong id="fWelcomeName"></strong> !</div>
+          <div class="field-group" style="margin-top:12px;">
+            <label>Créez votre mot de passe <small>(min. 6 car.)</small></label>
+            <div class="inp-wrap"><span>🔒</span><input type="password" id="fNewPwd" placeholder="Nouveau mot de passe..."></div>
+          </div>
+          <p id="fErrPwd" class="ferr hidden"></p>
+          <button class="btn-login btn-login-ok" id="btnFSetPwd"><span>Activer mon compte</span><span>→</span></button>
+        </div>
+      </div>
+    </div>
+    <p class="login-footer">MissionIT v3.2 · Système sécurisé</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     APPLICATION PRINCIPALE
+════════════════════════════════════════ -->
+<div id="app" class="hidden">
+
+  <header class="topbar">
+    <div class="tb-left">
+      <button id="btnMenuToggle" class="btn-menu-toggle">☰</button>
+      <div class="tb-brand">
+        <div class="tb-logo">⚡</div>
+        <div class="tb-brand-text">
+          <span class="tb-appname">MissionIT</span>
+          <span class="tb-domain" id="tbDomain"></span>
+        </div>
+      </div>
+    </div>
+    <div class="tb-right">
+      <div id="tbRolePill" class="tb-role-pill"></div>
+      <button class="btn-theme-toggle" id="btnThemeToggle" title="Changer de thème" aria-pressed="false">
+        <span class="tt-icon-light">🌙</span>
+        <span class="tt-icon-dark">☀️</span>
+      </button>
+      <button class="btn-notif-tb" id="btnNotif">
+        🔔<span id="notifBadge" class="notif-badge hidden">0</span>
+      </button>
+      <button id="btnTbUser" class="btn-tb-user">
+        <div id="tbAvatar" class="tb-avatar"></div>
+        <span id="tbUserName">—</span>
+        <span class="tb-caret">▾</span>
+      </button>
+      <button id="btnLogout" class="btn-logout-tb">↩ Déconnexion</button>
+    </div>
+  </header>
+
+  <div id="notifPanel" class="notif-panel hidden">
+    <div class="notif-panel-hdr">
+      <strong>🔔 Notifications</strong>
+      <button id="btnClearNotifs">Tout effacer</button>
+    </div>
+    <div id="notifList" class="notif-list-inner"></div>
+  </div>
+
+  <div class="app-body">
+    <div id="sbOverlay" class="sb-overlay hidden"></div>
+
+    <aside id="sidebar" class="sidebar">
+      <div class="sb-header">
+        <div id="sbAvatar" class="sb-avatar-lg"></div>
+        <div class="sb-user-info">
+          <span id="sbUserName">—</span>
+          <span id="sbUserRole">—</span>
+        </div>
+      </div>
+      <nav class="sb-nav">
+        <div class="sb-section-title">NAVIGATION</div>
+        <a href="#" class="sb-item active" id="navMissions">
+          <span class="sb-ico">📋</span><span class="sb-lbl">Missions</span>
+          <span id="bdgMissions" class="sb-badge">0</span>
+          <span id="bdgValidation" class="sb-badge sb-badge-red hidden">!</span>
+        </a>
+        <a href="#" class="sb-item fonly hidden" id="navMesMissions">
+          <span class="sb-ico">🎯</span><span class="sb-lbl">Mes missions</span>
+          <span id="bdgMes" class="sb-badge sb-badge-orange hidden">0</span>
+        </a>
+        <a href="#" class="sb-item adm-only hidden" id="navFoncts">
+          <span class="sb-ico">👥</span><span class="sb-lbl">Fonctionnaires</span>
+          <span id="bdgFoncts" class="sb-badge">0</span>
+        </a>
+        <a href="#" class="sb-item adm-only hidden" id="navStats">
+          <span class="sb-ico">📊</span><span class="sb-lbl">Statistiques</span>
+        </a>
+        <div class="sb-section-title">COMMUNICATION</div>
+        <a href="#" class="sb-item" id="navChat">
+          <span class="sb-ico">💬</span><span class="sb-lbl">Chat</span>
+          <span id="bdgChat" class="sb-badge sb-badge-red hidden">0</span>
+        </a>
+        <div class="sb-section-title">COMPTE</div>
+        <a href="#" class="sb-item fonly hidden" id="navProfile">
+          <span class="sb-ico">👤</span><span class="sb-lbl">Mon profil</span>
+        </a>
+        <a href="#" class="sb-item adm-only hidden" id="navMyAccount">
+          <span class="sb-ico">⚙️</span><span class="sb-lbl">Mon compte</span>
+        </a>
+        <a href="#" class="sb-item" id="navGuide">
+          <span class="sb-ico">📖</span><span class="sb-lbl">Guide d'utilisation</span>
+        </a>
+      </nav>
+      <button id="btnSbAddMission" class="sb-btn-create adm-only hidden">＋ Nouvelle mission</button>
+      <div id="sbAccessNote" class="sb-access-note hidden">🔒 Certaines sections sont réservées aux admins.</div>
+    </aside>
+
+    <main id="mainContent" class="main-content">
+      <div id="toastZone" class="toast-zone"></div>
+
+      <!-- ▸ MISSIONS -->
+      <section id="pageMissions" class="page">
+        <div class="page-hero">
+          <div class="page-hero-text">
+            <h2 id="missionsTitle">Missions</h2>
+            <p id="missionsSub">Vue d'ensemble</p>
+          </div>
+          <div class="page-hero-actions">
+            <button id="btnHeaderAddMission" class="btn-primary adm-only hidden">＋ Créer une mission</button>
+          </div>
+        </div>
+        <div class="toolbar-area">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="searchMissions" placeholder="Rechercher missions, tags...">
+            <button id="btnClearSearch" class="clear-search hidden">✕</button>
+          </div>
+          <div class="filter-strip">
+            <button class="fchip active" data-filter="all">Toutes</button>
+            <button class="fchip" data-filter="open">Ouvertes</button>
+            <button class="fchip" data-filter="in-progress">En cours</button>
+            <button class="fchip adm-only hidden" data-filter="pending_validation">À valider</button>
+            <button class="fchip" data-filter="validated">Validées</button>
+          </div>
+        </div>
+        <div id="missionGrid" class="mission-grid"></div>
+        <div id="emptyMissions" class="empty-state hidden"><div class="es-ico">📋</div><h3>Aucune mission</h3><p>Créez votre première mission.</p></div>
+        <div id="noResultsMissions" class="empty-state hidden"><div class="es-ico">🔍</div><h3>Aucun résultat</h3></div>
+      </section>
+
+      <!-- ▸ MES MISSIONS -->
+      <section id="pageMesMissions" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>Mes missions</h2><p>Suivi personnel</p></div>
+          <span class="role-chip chip-f">Fonctionnaire</span>
+        </div>
+        <div class="tab-bar">
+          <button class="tabbtn active" data-tab="tabAssigned">🎯 Assignées <span id="cntAssigned" class="tab-cnt">0</span></button>
+          <button class="tabbtn" data-tab="tabPool">🌐 Disponibles <span id="cntPool" class="tab-cnt tab-cnt-g">0</span></button>
+          <button class="tabbtn" data-tab="tabDone">✅ Terminées <span id="cntDone" class="tab-cnt">0</span></button>
+        </div>
+        <div id="tabAssigned" class="tab-pane active-pane">
+          <div id="listAssigned" class="mission-grid"></div>
+          <div id="emptyAssigned" class="empty-state"><div class="es-ico">🎯</div><h3>Aucune mission assignée</h3></div>
+        </div>
+        <div id="tabPool" class="tab-pane hidden">
+          <div class="pool-banner">⚡ Premier arrivé, premier servi — réservez une mission pour la bloquer.</div>
+          <div id="listPool" class="mission-grid"></div>
+          <div id="emptyPool" class="empty-state"><div class="es-ico">🌐</div><h3>Aucune mission disponible</h3></div>
+        </div>
+        <div id="tabDone" class="tab-pane hidden">
+          <div id="listDone" class="mission-grid"></div>
+          <div id="emptyDone" class="empty-state"><div class="es-ico">✅</div><h3>Aucune mission terminée</h3></div>
+        </div>
+      </section>
+
+      <!-- ▸ MON PROFIL -->
+      <section id="pageProfile" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2 id="profileHeading">Mon profil</h2><p>Tableau de bord personnel</p></div>
+          <span class="role-chip chip-f">Fonctionnaire</span>
+        </div>
+        <div class="profile-layout">
+          <div class="profile-card-main">
+            <div class="pcard-avatar" id="pAvatar">F</div>
+            <div class="pcard-info">
+              <h3 id="pNom">—</h3><p id="pEmail">—</p><p id="pTel">—</p><p id="pDept">—</p><small id="pDate">—</small>
+            </div>
+            <button class="btn-change-pwd" id="btnChangePwdF">🔑 Changer mot de passe</button>
+          </div>
+          <div class="profile-stats-row">
+            <div class="pstat-box pstat-blue"><span class="psb-num" id="pTotal">0</span><span class="psb-lbl">Total</span></div>
+            <div class="pstat-box pstat-orange"><span class="psb-num" id="pEnCours">0</span><span class="psb-lbl">En cours</span></div>
+            <div class="pstat-box pstat-green"><span class="psb-num" id="pValidees">0</span><span class="psb-lbl">Validées</span></div>
+            <div class="pstat-box pstat-purple"><span class="psb-num" id="pTaux">0%</span><span class="psb-lbl">Complétion</span></div>
+          </div>
+          <div class="profile-progress-card">
+            <div class="prog-header"><span>Progression globale</span><span id="progPct">0%</span></div>
+            <div class="prog-track"><div id="progFill" class="prog-fill"></div></div>
+          </div>
+          <div class="profile-chart-card">
+            <h4>Répartition des missions</h4>
+            <div id="profileChart" class="mini-bar-chart"></div>
+          </div>
+          <div class="profile-history-card">
+            <h4>📅 Historique</h4>
+            <div id="histList" class="hist-list"></div>
+            <div id="emptyHist" class="empty-state small-empty hidden"><div class="es-ico">📅</div><p>Aucune activité</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ▸ FONCTIONNAIRES -->
+      <section id="pageFoncts" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>Fonctionnaires</h2><p>Gestion de l'équipe</p></div>
+          <div class="page-hero-actions">
+            <span class="role-chip chip-a">Admin</span>
+            <button id="btnAddFonct" class="btn-primary">＋ Ajouter un fonctionnaire</button>
+          </div>
+        </div>
+        <div class="fonct-guide-banner">
+          <div class="fgb-icon">💡</div>
+          <div class="fgb-text">
+            <strong>Comment ajouter un fonctionnaire ?</strong>
+            <p>Cliquez sur <strong>"＋ Ajouter un fonctionnaire"</strong>, remplissez ses informations, puis <strong>copiez le code d'invitation</strong> généré et transmettez-le lui par email ou message.</p>
+          </div>
+          <button class="fgb-close" onclick="this.parentElement.style.display='none'">✕</button>
+        </div>
+        <div class="team-kpi-row">
+          <div class="kpi-box"><span id="kpiTotal">0</span><span>Total</span></div>
+          <div class="kpi-box kpi-green"><span id="kpiActif">0</span><span>Actifs</span></div>
+          <div class="kpi-box kpi-orange"><span id="kpiPending">0</span><span>En attente</span></div>
+          <div class="kpi-box kpi-red"><span id="kpiSusp">0</span><span>Suspendus</span></div>
+        </div>
+        <div id="fonctGrid" class="fonct-grid"></div>
+        <div id="emptyFoncts" class="empty-state hidden">
+          <div class="es-ico">👥</div>
+          <h3>Aucun fonctionnaire</h3>
+          <p>Cliquez sur <strong>"＋ Ajouter un fonctionnaire"</strong> pour commencer.</p>
+          <button class="btn-primary" style="margin-top:14px;" onclick="openModalFonct()">＋ Ajouter maintenant</button>
+        </div>
+      </section>
+
+      <!-- ▸ STATISTIQUES -->
+      <section id="pageStats" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>Statistiques</h2><p>Tableau de bord analytique</p></div>
+          <span class="role-chip chip-a">Admin</span>
+        </div>
+        <div class="stats-kpi-grid">
+          <div class="skpi skpi-blue"><div class="skpi-ico">📋</div><span id="skMissions">0</span><span>Missions</span></div>
+          <div class="skpi skpi-indigo"><div class="skpi-ico">👥</div><span id="skFoncts">0</span><span>Fonctionnaires</span></div>
+          <div class="skpi skpi-amber"><div class="skpi-ico">⏳</div><span id="skEnCours">0</span><span>En cours</span></div>
+          <div class="skpi skpi-violet"><div class="skpi-ico">⌛</div><span id="skAValider">0</span><span>À valider</span></div>
+          <div class="skpi skpi-green"><div class="skpi-ico">✅</div><span id="skValidees">0</span><span>Validées</span></div>
+          <div class="skpi skpi-red"><div class="skpi-ico">🚨</div><span id="skUrgentes">0</span><span>Urgentes</span></div>
+        </div>
+        <div class="stats-two-col">
+          <div class="stats-panel"><h4>Répartition par statut</h4><div id="statsChart" class="stats-bar-chart"></div></div>
+          <div class="stats-panel"><h4>🏆 Top fonctionnaires</h4><div id="topFoncts" class="top-list"></div></div>
+        </div>
+        <div class="stats-panel" style="margin-top:18px;">
+          <h4>🚨 Missions urgentes & délais proches</h4>
+          <div id="urgentList" class="urgent-missions-list"></div>
+          <div id="emptyUrgent" class="empty-state small-empty hidden"><div class="es-ico">✅</div><p>Aucune urgence</p></div>
+        </div>
+      </section>
+
+      <!-- ▸ MON COMPTE (admin) -->
+      <section id="pageMyAccount" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>Mon compte</h2><p>Paramètres administrateur</p></div>
+          <span class="role-chip chip-a">Admin</span>
+        </div>
+        <div class="account-card">
+          <div class="pcard-avatar" id="acAvatar">A</div>
+          <div class="pcard-info">
+            <h3 id="acNom">—</h3><p id="acEmail">—</p><small id="acDate">—</small>
+          </div>
+          <button class="btn-change-pwd" id="btnChangePwdA">🔑 Changer mot de passe</button>
+        </div>
+      </section>
+
+      <!-- ▸ GUIDE (dans l'app) -->
+      <section id="pageGuide" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>📖 Guide d'utilisation</h2><p>Tout ce que vous devez savoir</p></div>
+        </div>
+        <div class="guide-tabs">
+          <button class="gtab active" data-gtab="gAdmin">🛡️ Administrateur</button>
+          <button class="gtab" data-gtab="gFonct">👨‍💼 Fonctionnaire</button>
+          <button class="gtab" data-gtab="gFlow">🔄 Cycle complet</button>
+        </div>
+        <div id="gAdmin" class="guide-panel">
+          <div class="guide-steps-list">
+            <div class="guide-step-item"><div class="gsi-num">1</div><div class="gsi-body"><h4>Créer votre compte administrateur</h4><p>Sur la page de connexion, cliquez <strong>"🛡️ Administrateur"</strong>, entrez votre email et mot de passe. Si l'email est inconnu, remplissez votre nom pour créer votre espace.</p></div></div>
+            <div class="guide-step-item"><div class="gsi-num">2</div><div class="gsi-body"><h4>Ajouter des fonctionnaires</h4><p>Menu <strong>"👥 Fonctionnaires"</strong> → <strong>"＋ Ajouter"</strong>. Un <strong>code d'invitation unique</strong> est généré — transmettez-le au fonctionnaire.</p><div class="guide-tip">💡 Vous pouvez régénérer le code via le bouton 🔑 sur la fiche du fonctionnaire.</div></div></div>
+            <div class="guide-step-item"><div class="gsi-num">3</div><div class="gsi-body"><h4>Créer des missions</h4><p>Cliquez <strong>"＋ Créer une mission"</strong>. 3 modes disponibles :</p><div class="guide-modes"><div class="gm-item gm-open"><span>📋 Ouverte</span><p>Tout fonctionnaire peut la prendre</p></div><div class="gm-item gm-specific"><span>🎯 Ciblée</span><p>Assignée à un fonctionnaire précis</p></div><div class="gm-item gm-pool"><span>🌐 Pool</span><p>Premier arrivé, premier servi</p></div></div></div></div>
+            <div class="guide-step-item"><div class="gsi-num">4</div><div class="gsi-body"><h4>Valider les missions terminées</h4><p>Quand un fonctionnaire marque une mission terminée, elle passe en <strong>"À valider"</strong>. L'admin peut <strong>✅ Valider</strong> ou <strong>↩ Rejeter</strong>.</p><div class="guide-tip">🔔 Un badge rouge apparaît dans le menu quand des missions attendent votre validation.</div></div></div>
+            <div class="guide-step-item"><div class="gsi-num">5</div><div class="gsi-body"><h4>Suivre les statistiques</h4><p>Menu <strong>"📊 Statistiques"</strong> → tableau de bord avec missions, fonctionnaires actifs, urgences et classement.</p></div></div>
+          </div>
+        </div>
+        <div id="gFonct" class="guide-panel hidden">
+          <div class="guide-steps-list">
+            <div class="guide-step-item gsi-fonct"><div class="gsi-num gsi-num-fonct">1</div><div class="gsi-body"><h4>Activer votre compte</h4><p>Votre admin vous a transmis un <strong>code d'invitation</strong>. Sur la connexion : <strong>"👨‍💼 Fonctionnaire"</strong> → email → le système vous demandera votre code puis de créer votre mot de passe.</p><div class="guide-tip guide-tip-fonct">💡 Le code ressemble à : <strong style="font-family:monospace;letter-spacing:2px;">AB3D7FKZ</strong></div></div></div>
+            <div class="guide-step-item gsi-fonct"><div class="gsi-num gsi-num-fonct">2</div><div class="gsi-body"><h4>Consulter les missions</h4><p>Dans <strong>"📋 Missions"</strong>, vous voyez toutes les missions de votre domaine, filtrables par statut.</p></div></div>
+            <div class="guide-step-item gsi-fonct"><div class="gsi-num gsi-num-fonct">3</div><div class="gsi-body"><h4>Prendre en charge une mission</h4><div class="guide-modes"><div class="gm-item gm-open"><span>📋 Ouverte</span><p>Cliquez <strong>"▶️ Prendre en charge"</strong></p></div><div class="gm-item gm-pool"><span>🌐 Pool</span><p>Cliquez <strong>"⚡ Réserver"</strong></p></div><div class="gm-item gm-specific"><span>🎯 Ciblée</span><p>Assignée directement</p></div></div></div></div>
+            <div class="guide-step-item gsi-fonct"><div class="gsi-num gsi-num-fonct">4</div><div class="gsi-body"><h4>Avancer et terminer</h4><p>Cliquez <strong>"▶️ Démarrer"</strong> puis <strong>"✔ Marquer terminée"</strong>. L'admin reçoit une demande de validation.</p><div class="guide-tip guide-tip-fonct">⏳ La mission passe en "À valider" jusqu'à confirmation.</div></div></div>
+            <div class="guide-step-item gsi-fonct"><div class="gsi-num gsi-num-fonct">5</div><div class="gsi-body"><h4>Suivre votre activité</h4><p>Menu <strong>"👤 Mon profil"</strong> → statistiques personnelles et historique.</p></div></div>
+          </div>
+        </div>
+        <div id="gFlow" class="guide-panel hidden">
+          <div class="flow-chart">
+            <div class="flow-node flow-admin"><div class="fn-ico">🛡️</div><div class="fn-label">Admin crée la mission</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node flow-fonct"><div class="fn-ico">👨‍💼</div><div class="fn-label">Fonctionnaire prend / réserve</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node flow-fonct"><div class="fn-ico">▶️</div><div class="fn-label">Fonctionnaire démarre</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node flow-fonct"><div class="fn-ico">✔</div><div class="fn-label">Fonctionnaire marque terminée</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node flow-pending"><div class="fn-ico">⏳</div><div class="fn-label">En attente de validation</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-split">
+              <div class="flow-node flow-ok"><div class="fn-ico">✅</div><div class="fn-label">Admin valide → Mission clôturée</div></div>
+              <div class="flow-or">ou</div>
+              <div class="flow-node flow-ko"><div class="fn-ico">↩</div><div class="fn-label">Admin rejette → Retour en cours</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ▸ CHAT -->
+      <section id="pageChat" class="page hidden">
+        <div class="page-hero">
+          <div class="page-hero-text"><h2>Chat</h2><p>Messagerie publique et privée</p></div>
+        </div>
+        <div class="chat-tabs-row">
+          <button class="chat-tab-btn active" id="ctbPublic" onclick="switchChatTab('public')">💬 Public</button>
+          <button class="chat-tab-btn" id="ctbPrivate" onclick="switchChatTab('private')">
+            🔒 Privé <span id="privUnreadBadge" class="chat-tab-badge hidden">0</span>
+          </button>
+        </div>
+        <div class="chat-shell">
+          <div class="chat-topbar" id="chatTopbar">
+            <strong>💬 Chat public</strong><small>Visible par tous</small>
+          </div>
+          <div class="chat-messages-area" id="chatMessages"></div>
+          <div class="chat-input-bar" id="chatInputBar">
+            <label class="attach-btn" title="Joindre un fichier">
+              📎<input type="file" id="chatFile" accept="image/*,.pdf,.doc,.docx,.txt" style="display:none;">
+            </label>
+            <input type="text" id="chatInput" placeholder="Écrivez un message..." maxlength="1000">
+            <button id="btnSendChat" class="send-btn">➤</button>
+          </div>
+          <div class="chat-footer-hint">Entrée pour envoyer · 📎 pour joindre</div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     MODALES
+════════════════════════════════════════ -->
+
+<!-- Modal Mission -->
+<div id="modalMission" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="mmTitle">Créer une mission</h3><button class="modal-close" data-close="modalMission">✕</button></div>
+    <div class="modal-body-scroll">
+      <div class="fg"><label>Titre *</label><input type="text" id="mTitle" maxlength="100" placeholder="Titre de la mission"></div>
+      <div class="fg"><label>Description *</label><textarea id="mDesc" rows="3" placeholder="Décrivez la mission..."></textarea></div>
+      <div class="fg"><label>Image (optionnelle)</label><input type="file" id="mImage" accept="image/*"></div>
+      <div class="fg">
+        <label>Mode d'assignation</label>
+        <div class="assign-grid">
+          <label class="aopt"><input type="radio" name="amode" value="open" checked><div class="aopt-body"><span>📋 Ouverte</span><small>Tout le monde peut agir</small></div></label>
+          <label class="aopt"><input type="radio" name="amode" value="specific"><div class="aopt-body"><span>🎯 Ciblée</span><small>Un fonctionnaire précis</small></div></label>
+          <label class="aopt"><input type="radio" name="amode" value="pool"><div class="aopt-body"><span>🌐 Pool</span><small>Premier disponible</small></div></label>
+        </div>
+      </div>
+      <div id="specificFonctField" class="fg hidden">
+        <label>Fonctionnaire *</label>
+        <select id="mFonct"><option value="">-- Sélectionner --</option></select>
+      </div>
+      <div class="fg-row">
+        <div class="fg"><label>Date limite</label><input type="date" id="mDeadline"></div>
+        <div class="fg"><label>Priorité</label>
+          <select id="mPriority"><option value="normal">Normale</option><option value="high">🔴 Haute</option><option value="urgent">🚨 Urgente</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Tags <small>(séparés par virgule)</small></label><input type="text" id="mTags" placeholder="backend, sécurité, infra..."></div>
+    </div>
+    <p id="mErr" class="ferr" style="padding:0 24px 8px;"></p>
+    <div class="modal-foot"><button class="btn-cancel" data-close="modalMission">Annuler</button><button id="btnSaveMission" class="btn-confirm">Créer</button></div>
+  </div>
+</div>
+
+<!-- Modal Fonctionnaire -->
+<div id="modalFonct" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="mfTitle">Ajouter un fonctionnaire</h3><button class="modal-close" data-close="modalFonct">✕</button></div>
+    <div class="modal-body-scroll">
+      <div class="info-banner">💡 Remplissez les informations. Un <strong>code d'invitation unique</strong> sera généré — transmettez-le au fonctionnaire pour qu'il active son compte.</div>
+      <div class="fg"><label>Nom complet *</label><input type="text" id="mfNom" maxlength="50" placeholder="Prénom Nom"></div>
+      <div class="fg"><label>Email *</label><input type="email" id="mfEmail" placeholder="email@exemple.com"></div>
+      <div class="fg"><label>Téléphone</label><input type="tel" id="mfTel" placeholder="06 00 00 00 00"></div>
+      <div class="fg"><label>Département / Service</label><input type="text" id="mfDept" placeholder="ex: Informatique, Réseau..."></div>
+    </div>
+    <p id="mfErr" class="ferr" style="padding:0 24px 8px;"></p>
+    <div class="modal-foot"><button class="btn-cancel" data-close="modalFonct">Annuler</button><button id="btnSaveFonct" class="btn-confirm">Ajouter et générer le code</button></div>
+  </div>
+</div>
+
+<!-- Modal Code Invitation -->
+<div id="modalInvite" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-head"><h3>🔑 Code d'invitation généré</h3><button class="modal-close" data-close="modalInvite">✕</button></div>
+    <div class="modal-body-scroll">
+      <div class="invite-success-header">
+        <div class="ish-icon">✅</div>
+        <div><h4>Compte créé avec succès !</h4><p>Transmettez ce code à <strong id="miNom"></strong></p></div>
+      </div>
+      <div class="invite-info-row"><span>📧 Email</span><strong id="miEmail"></strong></div>
+      <div class="invite-code-block">
+        <span class="icb-label">CODE D'INVITATION À TRANSMETTRE</span>
+        <div class="icb-row"><span id="miCode" class="icb-code"></span><button id="btnCopyCode" class="btn-copy-code">📋 Copier</button></div>
+        <p class="icb-hint">⚠️ Usage unique. Ce code permet au fonctionnaire d'activer son compte lors de sa première connexion.</p>
+      </div>
+      <div class="invite-steps">
+        <p class="invite-steps-title">📋 Instructions pour le fonctionnaire :</p>
+        <ol>
+          <li>Ouvrir MissionIT et cliquer <strong>"👨‍💼 Fonctionnaire"</strong></li>
+          <li>Saisir l'email : <strong id="miEmailStep"></strong></li>
+          <li>Cliquer "Se connecter" — le système demandera le code d'invitation</li>
+          <li>Créer son mot de passe personnel</li>
+        </ol>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="btn-cancel" id="btnRegenCode">🔄 Regénérer le code</button><button class="btn-confirm" data-close="modalInvite">Fermer</button></div>
+  </div>
+</div>
+
+<!-- Modal Changer mot de passe -->
+<div id="modalChangePwd" class="modal-overlay hidden">
+  <div class="modal-box">
+    <div class="modal-head"><h3>🔑 Changer le mot de passe</h3><button class="modal-close" data-close="modalChangePwd">✕</button></div>
+    <div class="modal-body-scroll">
+      <div class="fg"><label>Mot de passe actuel</label><div class="inp-wrap"><span>🔒</span><input type="password" id="cpOld" placeholder="Actuel..."></div></div>
+      <div class="fg"><label>Nouveau mot de passe</label><div class="inp-wrap"><span>🔑</span><input type="password" id="cpNew" placeholder="Nouveau..."></div></div>
+      <div class="fg"><label>Confirmer</label><div class="inp-wrap"><span>✅</span><input type="password" id="cpConfirm" placeholder="Confirmer..."></div></div>
+    </div>
+    <p id="cpErr" class="ferr" style="padding:0 24px 8px;"></p>
+    <div class="modal-foot"><button class="btn-cancel" data-close="modalChangePwd">Annuler</button><button id="btnSaveChangePwd" class="btn-confirm">Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- Modal Détail Mission -->
+<div id="modalDetail" class="modal-overlay hidden">
+  <div class="modal-box modal-box-lg">
+    <div class="modal-head"><h3 id="mdTitle">Détail</h3><button class="modal-close" data-close="modalDetail">✕</button></div>
+    <div class="modal-body-scroll" id="mdContent"></div>
+    <div class="modal-foot"><button class="btn-confirm" data-close="modalDetail">Fermer</button></div>
+  </div>
+</div>
+<div id="modalForgot" class="modal-overlay hidden">
+  <div class="modal-box modal-forgot">
+    <div class="modal-head">
+      <h3>🔑 Réinitialiser le mot de passe</h3>
+      <button class="modal-close" onclick="closeForgotModal()">✕</button>
+    </div>
+    <div class="modal-body-scroll">
+ 
+      <!-- Étape 1 : saisie email -->
+      <div id="forgotStep1">
+        <div class="forgot-hero">
+          <span class="fh-icon">📧</span>
+          <h4>Mot de passe oublié ?</h4>
+          <p>Saisissez votre email. Supabase enverra un <strong>lien de réinitialisation</strong> via votre Gmail connecté.</p>
+        </div>
+        <div class="field-group" style="margin-top:16px;">
+          <label>Votre email administrateur</label>
+          <div class="inp-wrap"><span>✉️</span><input type="email" id="forgotEmail" placeholder="admin@exemple.com"></div>
+        </div>
+        <p id="forgotErr1" class="ferr hidden"></p>
+        <button class="btn-login btn-forgot-send" id="btnForgotSend" onclick="sendForgotEmail()">
+          <span>📤</span><span>Envoyer le lien de réinitialisation</span>
+        </button>
+      </div>
+ 
+      <!-- Étape 2 : confirmation envoyée -->
+      <div id="forgotStep2" class="hidden">
+        <div class="forgot-success">
+          <span class="fs-icon">✅</span>
+          <h4>Email envoyé !</h4>
+          <p>Un lien de réinitialisation a été envoyé à <strong id="forgotEmailSent"></strong>.<br><br>
+          Cliquez sur le lien dans l'email pour créer un nouveau mot de passe. Le lien est valable <strong>1 heure</strong>.</p>
+          <div class="forgot-tips">
+            <p>💡 Vous ne voyez pas l'email ? Vérifiez vos <strong>spams</strong> ou patientez quelques minutes.</p>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+    <div class="modal-foot">
+      <button class="btn-cancel" onclick="closeForgotModal()">Fermer</button>
+      <button class="btn-confirm hidden" id="btnForgotResend" onclick="sendForgotEmail()">🔄 Renvoyer</button>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-db.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
